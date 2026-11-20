@@ -1,9 +1,20 @@
 #include <bn_core.h>
+#include <bn_sprite_ptr.h>
+#include <bn_sprite_animate_actions.h>
 
-int main() {
+#include "bn_sprite_items_look.h"
+
+int main()
+{
     bn::core::init();
 
-    while(true) {
+    bn::sprite_ptr looker = bn::sprite_items::look.create_sprite(0, 0);
+    looker.set_tiles(bn::sprite_items::look.tiles_item(), 1);
+    bn::sprite_animate_action<4> animation = bn::create_sprite_animate_action_forever(looker, 10, bn::sprite_items::look.tiles_item(), 0, 1, 2, 3);
+
+    while (true)
+    {
+        animation.update();
         bn::core::update();
     }
 }
